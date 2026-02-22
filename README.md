@@ -76,7 +76,7 @@ Real-Time Dashboard Update
 
 | Existing Market Systems | ₹63,000 – ₹1,80,000 |
 |--------------------------|-------------------|
-| **KISAN** | **₹20,000 – ₹30,000** |
+| **KISAN** | **₹15,000 – ₹20,000** |
 
 ✔ Affordable for small & medium farmers  
 ✔ More features at lower cost  
@@ -146,7 +146,7 @@ Device Management | System Integration
 # 🏆 HackNovation 2.0  
 **Theme:** Agriculture  
 **Category:** Hardware + AI  
-**PS Number:** HK02  
+**PS Number:** HK05  
 
 ---
 
