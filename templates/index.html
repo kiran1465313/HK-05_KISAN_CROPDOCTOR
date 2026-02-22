@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌱 Punjab Crop Doctor - SIH 2026</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: white; min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header { 
+            text-align: center; padding: 30px 0; 
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px; margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .header h1 { font-size: 3em; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        .header p { font-size: 1.3em; opacity: 0.9; }
+        
+        /* Video + Status */
+        .main-grid { display: grid; grid-template-columns: 1fr 400px; gap: 30px; align-items: start; }
+        .video-container { position: relative; }
+        .video-feed { 
+            width: 100%; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            background: #000;
+        }
+        .live-badge { 
+            position: absolute; top: 20px; right: 20px; 
+            background: #ef4444; color: white; padding: 10px 20px; 
+            border-radius: 50px; font-weight: bold; animation: pulse 2s infinite;
+        }
+        
+        /* Status Card */
+        .status-card { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); 
+            border-radius: 20px; padding: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+        .status-icon { font-size: 3em; text-align: center; margin-bottom: 20px; }
+        .status-main { font-size: 2.5em; font-weight: bold; text-align: center; margin: 20px 0; }
+        .healthy { color: #10b981 !important; }
+        .mild { color: #f59e0b !important; }
+        .moderate, .severe { color: #ef4444 !important; animation: shake 0.5s infinite; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .status-details { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 1.1em; }
+        .detail { text-align: center; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; }
+        
+        /* Metrics Grid */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
+        .metric-card { 
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); 
+            border-radius: 20px; padding: 25px; text-align: center; 
+            border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s;
+        }
+        .metric-card:hover { transform: translateY(-10px); }
+        .metric-icon { font-size: 3em; margin-bottom: 15px; }
+        .metric-value { font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        
+        /* History */
+        .history-section { margin-top: 40px; }
+        .history-card { 
+            background: rgba(255,255,255,0.05); border-radius: 20px; 
+            padding: 25px; overflow: hidden;
+        }
+        .history-list { max-height: 400px; overflow-y: auto; }
+        .history-item { 
+            display: flex; justify-content: space-between; padding: 15px; 
+            margin: 10px 0; background: rgba(255,255,255,0.08); 
+            border-radius: 15px; border-left: 5px solid #10b981;
+        }
+        .history-item.needs-water { border-left-color: #f59e0b; }
+        .history-item.severe { border-left-color: #ef4444; }
+        
+        /* Responsive */
+        @media (max-width: 768px) { 
+            .main-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2em; }
+        }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-seedling"></i> Crop Doctor</h1>
+            <p><strong>Hacknovation 2.0 </strong> | AI-Powered Disease Detection & Precision Watering</p>
+        </div>
+        
+        <!-- Main Layout -->
+        <div class="main-grid">
+            <!-- Video Feed -->
+            <div class="video-container">
+                <img src="{{ url_for('video_feed') }}" class="video-feed" alt="Live Feed">
+                <div class="live-badge"><i class="fas fa-circle"></i> LIVE</div>
+            </div>
+            
+            <!-- Status Card -->
+            <div class="status-card">
+                <div class="status-icon" id="statusIcon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="status-main healthy" id="severityMain">READY</div>
+                <div class="status-details">
+                    <div class="detail">
+                        <div><i class="fas fa-chart-line"></i> Confidence</div>
+                        <div id="confidenceVal">0%</div>
+                    </div>
+                    <div class="detail">
+                        <div><i class="fas fa-tint"></i> Water Needed</div>
+                        <div id="waterVal">0ml</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px; font-size: 1.1em;">
+                    <div id="diseaseVal">Initializing...</div>
+                    <div id="timestampVal">--:--</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-leaf"></i></div>
+                <div class="metric-value" id="diseaseCount">0</div>
+                <div>Diseases Detected</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-tint-drop"></i></div>
+                <div class="metric-value" id="totalWater">0ml</div>
+                <div>Total Water Saved</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon"><i class="fas fa-clock"></i></div>
+                <div class="metric-value" id="uptime">--</div>
+                <div>Uptime</div>
+            </div>
+        </div>
+        
+        <!-- History -->
+        <div class="history-section">
+            <div class="history-card">
+                <h3><i class="fas fa-history"></i> Recent Detections (Last 10)</h3>
+                <div class="history-list" id="historyList">
+                    <div style="text-align: center; padding: 40px; opacity: 0.5;">
+                        Waiting for first detection...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let totalWater = 0;
+        let detectionCount = 0;
+        
+        function updateDashboard() {
+            fetch('/api/status')
+                .then(r => r.json())
+                .then(data => {
+                    // Update main status
+                    document.getElementById('diseaseVal').textContent = data.disease;
+                    document.getElementById('confidenceVal').textContent = (data.confidence*100).toFixed(1) + '%';
+                    document.getElementById('waterVal').textContent = data.water_ml + 'ml';
+                    document.getElementById('timestampVal').textContent = data.timestamp;
+                    
+                    // Severity styling
+                    const severityEl = document.getElementById('severityMain');
+                    severityEl.textContent = data.severity.toUpperCase();
+                    severityEl.className = data.severity;
+                    
+                    // Status icon
+                    const iconEl = document.getElementById('statusIcon');
+                    const emojis = {healthy: 'fa-leaf', mild: 'fa-exclamation-triangle', 
+                                  moderate: 'fa-fire', severe: 'fa-skull-crossbones'};
+                    iconEl.innerHTML = `<i class="fas ${emojis[data.severity] || 'fa-robot'}"></i>`;
+                    
+                    // Water total
+                    if (data.water_ml > 0) {
+                        totalWater += data.water_ml;
+                        detectionCount++;
+                        document.getElementById('totalWater').textContent = totalWater + 'ml';
+                        document.getElementById('diseaseCount').textContent = detectionCount;
+                    }
+                });
+            
+            // Update history
+            fetch('/api/history')
+                .then(r => r.json())
+                .then(history => {
+                    const list = document.getElementById('historyList');
+                    list.innerHTML = history.map(h => 
+                        `<div class="history-item ${h.severity}">
+                            <div>${h.disease} - ${h.severity.toUpperCase()}</div>
+                            <div>${h.water_ml}ml • ${h.confidence*100|0}% • ${h.timestamp}</div>
+                        </div>`
+                    ).join('');
+                });
+        }
+        
+        // Update every 500ms for smooth live effect
+        setInterval(updateDashboard, 500);
+        updateDashboard();  // Initial load
+        
+        // Uptime counter
+        let startTime = Date.now();
+        setInterval(() => {
+            let uptime = Math.floor((Date.now() - startTime) / 1000 / 60);
+            document.getElementById('uptime').textContent = uptime + 'min';
+        }, 60000);
+    </script>
+</body>
+</html>

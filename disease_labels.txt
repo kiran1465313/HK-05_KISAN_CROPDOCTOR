@@ -1,0 +1,56 @@
+Cotton___healthy
+Cotton___bollworm - mild
+Cotton___bollworm - moderate
+Cotton___bollworm - severe
+Cotton___healthy 
+Cotton___mealybug 
+Cotton___mealybug - mild
+Cotton___mealybug - moderate
+Cotton___mealybug - severe
+Cotton___healthy
+Cotton___fusarium_wilt - mild
+Cotton___fusarium_wilt - moderate
+Cotton___fusarium_wilt - severe
+Cotton___healthy
+Cotton___healthy 
+Cotton___healthy 
+Cotton___thrips - healthy
+Cotton___thrips - mild
+Cotton___thrips - moderate
+Cotton___thrips - severe
+Corn___healthy
+Corn___Cercospora_leaf_spot Gray_leaf_spot - mild
+Corn___Cercospora_leaf_spot Gray_leaf_spot - moderate
+Corn___Cercospora_leaf_spot Gray_leaf_spot - severe
+Corn___healthy
+Corn___Common_rust_ - mild
+Corn___Common_rust_ - moderate
+Corn___Common_rust_ - severe
+Corn___Northern_Leaf_Blight - healthy
+Corn___Northern_Leaf_Blight - mild
+Corn___Northern_Leaf_Blight - moderate
+Corn___Northern_Leaf_Blight - severe
+Corn___healthy
+Corn___healthy - mild
+Corn___healthy - moderate
+Corn___healthy - severe
+Rice___Bacterial_blight - healthy
+Rice___Bacterial_blight - mild
+Rice___Bacterial_blight - moderate
+Rice___Bacterial_blight - severe
+Rice___Brown_spot - healthy
+Rice___Brown_spot - mild
+Rice___Brown_spot - moderate
+Rice___Brown_spot - severe
+Wheat___Leaf_rust - healthy
+Wheat___Leaf_rust - mild
+Wheat___Leaf_rust - moderate
+Wheat___Leaf_rust - severe
+Wheat___Loose_smut - healthy
+Wheat___Loose_smut - mild
+Wheat___Loose_smut - moderate
+Wheat___Loose_smut - severe
+Wheat___healthy
+Wheat___healthy
+Wheat___healthy
+Wheat___healthy

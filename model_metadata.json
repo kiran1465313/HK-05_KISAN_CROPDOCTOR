@@ -1,0 +1,33 @@
+{
+  "disease_classes": [
+    "Corn___Cercospora_leaf_spot Gray_leaf_spot",
+    "Corn___Common_rust_",
+    "Corn___Northern_Leaf_Blight",
+    "Corn___healthy",
+    "Cotton___bollworm",
+    "Cotton___fusarium_wilt",
+    "Cotton___healthy",
+    "Cotton___mealybug",
+    "Cotton___thrips",
+    "Rice___Bacterial_blight",
+    "Rice___Brown_spot",
+    "Wheat___Leaf_rust",
+    "Wheat___Loose_smut",
+    "Wheat___healthy"
+  ],
+  "severity_classes": [
+    "healthy",
+    "mild",
+    "moderate",
+    "severe"
+  ],
+  "input_shape": [
+    128,
+    128,
+    3
+  ],
+  "model_accuracy": {
+    "disease_accuracy": 0.8405017852783203,
+    "severity_accuracy": 0.740143358707428
+  }
+}
